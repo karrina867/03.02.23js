@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function test1(){
+            consol.log(this);
+            let test = function(){
+            consol.log(this);
+
+            }
+            test();
+
+        }
+       /* test1();*/
+
+        let test2 ={
+            name:'Alex',
+            t1: function(){
+                console.log(this);
+                console.log(this.name);
+
+                function innerTest(){
+                    console.log(this);
+                console.log(this.name);
+
+                }
+
+                innerTest();
+            }
+
+        }
+      /*  test2.t1();*/
+
+      let test3 = {
+        a:10,
+        b:25,
+        t1: function(){
+            console.log(this.a + this.b);
+            console.log(this);
+        }
+      }
+      /*test3.t1();
+      setTimeout(test3.t1(), 1000)*/
+
+      // call(), apply()
+
+      let test4 ={
+            name:'Alex',
+            t1: function(){
+                console.log(this);
+                function innerTest(a,b){
+                    console.log(this);
+                    console.log(a, b);
+                }
+
+                innerTest.call(this, 15, 12);
+                innerTest.apply(this,[51, 34]);
+
+            }
+
+        }
+        /*test4.t1();*/
+
+        //bind(),
+        let test5 ={
+          
+            t1: function(){
+                console.log(this);
+                function innerTest(a,b){
+                    console.log(this);
+                 
+                }
+
+                innerTest.bind(this)();
+                
+                let contex = innerTest.bind(this);
+
+           /*     contex();
+                contex();
+                contex();
+*/
+            }
+
+        }
+       /* test5.t1()*/
+
+        function ShowNumber(number){
+            this.number = number;
+            this.timer = setInterval(show.bind(this), 1000);
+
+
+           this.funk =  function show(){
+                console.log( --this.number);
+                    if(this.number == 0) clearInterval(this.timer);
+                }
+            }
+     /*   let show1 = new ShowNumber(10);
+
+
+        let showT = a => console.log('hello' + a);
+
+        let show22 = a => a*a;
+*/
+        function Timer(){
+
+        }
+        
+
+
+
+function ShowNumber1(number){
+            this.number = number;
+            this.timer = setInterval  
+            (() =>{
+                console.log( --this.number);
+                    if(this.number == 0) clearInterval(this.timer);
+                },1000);
+            }
+            new ShowNumber1(11);
+
+
+            let person = {
+                name: 'Vlad',
+                age:25,
+                logInfo: function(job, phone){
+                    console.log(`Name is ${this.name}`)
+                    console.log(`Age is ${this.age}`)
+                    console.log(`Job is ${job}`)
+                    console.log(`Phone is ${phone}`)
+                }
+                }  
+                person.logInfo('инвестор', '+234556');
+
+                person2 = {
+                    name: 'Vova',
+                    age:31,
+
+                }
+              //  person.logInfo.call(person2,'FD','+23456789');
+
+             let InfoVava = person.logInfo.bind(person2);
+             InfoVava('FD','+23456789');
+             
+            function Time(hov,min,sec){
+                this.hov = hov;
+                this.min = min;
+                this.sec = sec;
+                this.ST = function showTime(){
+                    console.log(this.hov + ':' + this.min + ':' + this.sec);
+                }
+                this.IT = function increaseTime(){
+                    this.sec = this.sec + 1;
+                    if(this.sec == 60){
+                        this.sec = 0;
+                        this.min = this.min + 1;
+                    }
+                    if(this.min == 60){
+                        this.min = 0;
+                        this.hov = this.hov + 1;
+                    }
+                    if(this.hov == 24){
+                        this.sec = 0;
+                        this.min = 0;
+                        this.hov = 0;
+                    }
+                }
+                this.SC = function star(){
+                    setInterval(Time(),1000);
+                }
+            }
+            new Time(22,34,33);
+    </script>
+</body>
+</html>
